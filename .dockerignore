@@ -1,0 +1,13 @@
+.git
+.venv
+.cache
+.env
+.env.*
+__pycache__
+**/__pycache__
+dist
+build
+.ruff_cache
+third_party/BabelDOC/.git
+third_party/BabelDOC/.venv
+third_party/BabelDOC/.cache

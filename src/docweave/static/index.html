@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dịch tài liệu PDF, giữ bố cục và tải bản dịch song ngữ với DocWeave.">
+  <title>DocWeave — Dịch tài liệu, giữ mạch đọc</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header class="header"><a class="brand" href="/" aria-label="DocWeave, trang chủ"><span class="brand-mark" aria-hidden="true">D<span>↗</span></span>DocWeave<span class="beta">BETA</span></a><span class="connection" id="connection">Đang kết nối…</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">KHÔNG GIAN DỊCH TÀI LIỆU</p><h1>Khác ngôn ngữ.<br><span>Trọn mạch đọc.</span></h1><p class="lead">Dịch PDF sang ngôn ngữ bạn cần, giữ lại bố cục quen thuộc.<br class="desktop"> Nhận bản dịch riêng và bản song ngữ để đối chiếu.</p></div><div class="paper-scene" aria-hidden="true"><div class="paper paper-back"><span>EN</span><i></i><i></i><i></i><div></div><i></i><i></i></div><div class="paper paper-front"><span>VI <b>↗</b></span><strong>Tài liệu của bạn.<br>Một góc nhìn mới.</strong><i></i><i></i><div></div><i></i></div><span class="scene-caption">NỘI DUNG MỚI · BỐ CỤC QUEN</span></div></section>
+    <div class="workspace">
+      <section class="card editor" aria-labelledby="new-title"><div class="section-heading"><div><p class="eyebrow">01 / BẮT ĐẦU</p><h2 id="new-title">Dịch một tài liệu</h2></div><span class="tag">PDF</span></div>
+        <form id="translate-form">
+          <label class="dropzone" id="dropzone" for="file"><input type="file" id="file" name="file" accept="application/pdf,.pdf" required><span class="upload-symbol" aria-hidden="true">↑</span><strong id="file-title">Thả tài liệu vào đây</strong><span id="file-description">hoặc bấm để chọn tệp PDF</span><small id="limits">Tối đa 25 MB · 100 trang</small></label>
+          <div class="language-row"><label>Ngôn ngữ gốc<select name="lang_in" id="lang-in"><option value="en">Tiếng Anh</option></select></label><button class="swap" id="swap" type="button" aria-label="Đổi chiều ngôn ngữ">⇄</button><label>Dịch sang<select name="lang_out" id="lang-out"><option value="vi">Tiếng Việt</option></select></label></div>
+          <div class="credentials" id="credentials"><label for="api-key">Khóa API dịch thuật <span id="key-optional"></span></label><input type="password" id="api-key" name="api_key" autocomplete="off" spellcheck="false" placeholder="Nhập khóa API của bạn"><p id="key-hint">Khóa chỉ dùng cho tác vụ, không lưu vào lịch sử hoặc tệp cấu hình.</p></div>
+          <p class="error" id="form-error" role="alert" hidden></p>
+          <button class="primary" id="submit" type="submit" disabled><span>Dịch tài liệu</span><span aria-hidden="true">↗</span></button>
+          <p class="privacy">Nội dung cần dịch được gửi tới dịch vụ dịch đã cấu hình. <span id="retention">Tệp được tự động dọn sau 24 giờ.</span></p>
+        </form>
+      </section>
+      <aside class="side"><section class="card guide"><p class="eyebrow">BẠN SẼ NHẬN ĐƯỢC</p><h2>Một tài liệu.<br>Hai cách đọc.</h2><div class="output-type"><span class="mini-page" aria-hidden="true">A</span><div><h3>Bản dịch hoàn chỉnh</h3><p>Đọc liền mạch bằng ngôn ngữ đã chọn.</p></div></div><div class="output-type"><span class="mini-page dual" aria-hidden="true">A / A</span><div><h3>PDF song ngữ</h3><p>Đối chiếu nguyên bản và bản dịch trong cùng tài liệu.</p></div></div><div class="note"><strong>Mẹo để có kết quả tốt</strong><p>Ưu tiên PDF có thể bôi chọn văn bản. PDF quét, bố cục phức tạp hoặc tài liệu có mật khẩu có thể cần xử lý thêm.</p></div></section><div class="engine"><span class="engine-dot"></span><div>Được xử lý bởi BabelDOC<small id="model">Đang đọc cấu hình dịch vụ…</small></div></div></aside>
+    </div>
+    <section class="history" aria-labelledby="history-title"><div class="section-heading"><div><p class="eyebrow">02 / KẾT QUẢ</p><h2 id="history-title">Tài liệu của bạn <span id="count">0</span></h2></div><button type="button" class="text-button" id="refresh">Làm mới ↻</button></div><p class="error" id="history-error" role="alert" hidden></p><div id="jobs"><div class="empty"><span aria-hidden="true">▤</span><h3>Chưa có tài liệu nào</h3><p>Tải PDF đầu tiên lên. Tiến độ và kết quả sẽ xuất hiện ở đây.</p></div></div></section>
+  </main>
+  <footer><span class="brand-small">DocWeave</span><span>Kết nối ngôn ngữ. Giữ nguyên ý tưởng.</span><span>Powered by BabelDOC · AGPL-3.0</span></footer>
+  <dialog id="auth-dialog"><form id="auth-form"><p class="eyebrow">KHÔNG GIAN RIÊNG</p><h2>Truy cập DocWeave</h2><p>Máy chủ này yêu cầu mã truy cập do người quản trị cung cấp.</p><label for="access-token">Mã truy cập</label><input id="access-token" type="password" autocomplete="off" required><p id="auth-error" class="error" role="alert" hidden></p><button class="primary" type="submit">Tiếp tục →</button></form></dialog>
+</body>
+</html>

@@ -1,0 +1,15 @@
+services:
+  docweave:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    env_file: .env
+    environment:
+      DOCWEAVE_DATA_DIR: /app/data
+      DOCWEAVE_ACCESS_TOKEN: ${DOCWEAVE_ACCESS_TOKEN:?Set DOCWEAVE_ACCESS_TOKEN in .env}
+    volumes:
+      - docweave-data:/app/data
+    stop_grace_period: 20s
+volumes:
+  docweave-data:
