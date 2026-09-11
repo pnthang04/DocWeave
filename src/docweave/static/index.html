@@ -17,7 +17,7 @@
         <form id="translate-form">
           <label class="dropzone" id="dropzone" for="file"><input type="file" id="file" name="file" accept="application/pdf,.pdf" required><span class="upload-symbol" aria-hidden="true">↑</span><strong id="file-title">Thả tài liệu vào đây</strong><span id="file-description">hoặc bấm để chọn tệp PDF</span><small id="limits">Tối đa 25 MB · 100 trang</small></label>
           <div class="language-row"><label>Ngôn ngữ gốc<select name="lang_in" id="lang-in"><option value="en">Tiếng Anh</option></select></label><button class="swap" id="swap" type="button" aria-label="Đổi chiều ngôn ngữ">⇄</button><label>Dịch sang<select name="lang_out" id="lang-out"><option value="vi">Tiếng Việt</option></select></label></div>
-          <div class="credentials" id="credentials"><label for="api-key">Khóa API dịch thuật <span id="key-optional"></span></label><input type="password" id="api-key" name="api_key" autocomplete="off" spellcheck="false" placeholder="Nhập khóa API của bạn"><p id="key-hint">Khóa chỉ dùng cho tác vụ, không lưu vào lịch sử hoặc tệp cấu hình.</p></div>
+          <div class="credentials server-credentials" id="credentials"><span class="server-lock" aria-hidden="true">◆</span><div><strong>Dịch vụ OpenRouter đã cấu hình</strong><p>Khóa API được bảo mật ở backend; bạn không cần nhập lại.</p></div></div>
           <p class="error" id="form-error" role="alert" hidden></p>
           <button class="primary" id="submit" type="submit" disabled><span>Dịch tài liệu</span><span aria-hidden="true">↗</span></button>
           <p class="privacy">Nội dung cần dịch được gửi tới dịch vụ dịch đã cấu hình. <span id="retention">Tệp được tự động dọn sau 24 giờ.</span></p>

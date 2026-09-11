@@ -124,11 +124,11 @@ $('translate-form').addEventListener('submit', async event => {
   if (!file) return showError('form-error', 'Hãy chọn một tài liệu PDF.');
   if (file.size > config.max_upload_mb * 1024 * 1024) return showError('form-error', `Tệp tối đa ${config.max_upload_mb} MB.`);
   if ($('lang-in').value === $('lang-out').value) return showError('form-error', 'Ngôn ngữ gốc và ngôn ngữ đích cần khác nhau.');
-  if (!config.server_key && !$('api-key').value.trim()) return showError('form-error', 'Nhập khóa API để bắt đầu dịch.');
+  if (!config.server_key) return showError('form-error', 'Backend chưa cấu hình OPENROUTER_API_KEY. Hãy điền khóa trong file .env rồi khởi động lại máy chủ.');
   $('submit').disabled = true; $('submit').firstElementChild.textContent = 'Đang tải tài liệu…';
   try {
     await api('/api/jobs', { method: 'POST', body: new FormData($('translate-form')) });
-    $('api-key').value = ''; $('file').value = ''; fileChanged(null);
+    $('file').value = ''; fileChanged(null);
     await refresh();
     $('history-title').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
   } catch (error) { showError('form-error', error.message); }
@@ -143,8 +143,8 @@ async function initialize() {
   $('limits').textContent = `Tối đa ${config.max_upload_mb} MB · ${config.max_pages} trang`;
   $('retention').textContent = `Tệp được tự động dọn sau ${config.retention_hours} giờ.`;
   $('model').textContent = `Model dịch: ${config.model}`;
-  $('key-optional').textContent = config.server_key ? '(không bắt buộc)' : '';
-  $('api-key').placeholder = config.server_key ? 'Để trống để dùng cấu hình máy chủ' : 'Nhập khóa API của bạn';
+  $('credentials').classList.toggle('missing', !config.server_key);
+  if (!config.server_key) $('credentials').querySelector('p').textContent = 'Backend chưa sẵn sàng: hãy cấu hình OPENROUTER_API_KEY trong file .env.';
   $('submit').disabled = false;
   await refresh();
 }

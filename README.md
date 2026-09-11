@@ -18,11 +18,11 @@ Mở **http://127.0.0.1:8000**. Trên PowerShell cũng có thể chạy:
 powershell -ExecutionPolicy Bypass -File scripts/start.ps1
 ```
 
-Chọn PDF, chọn ngôn ngữ gốc/đích, nhập khóa OpenRouter và bấm **Dịch tài liệu**.
-Khóa nhập trên giao diện chỉ dùng cho tác vụ hiện tại, không ghi vào cơ sở dữ
-liệu hay cấu hình. Nội dung dịch được gửi tới dịch vụ đã cấu hình và có thể
-phát sinh phí theo tài khoản của bạn. Chưa có khóa thì web vẫn mở được nhưng
-không gửi tác vụ dịch được.
+Chọn PDF, chọn ngôn ngữ gốc/đích và bấm **Dịch tài liệu**. Khóa OpenRouter chỉ
+được cấu hình ở backend, không hiện cho người dùng và không ghi vào lịch sử tác vụ.
+Nội dung dịch được gửi tới dịch vụ đã cấu hình và có thể phát sinh phí theo tài
+khoản của bạn. Nếu backend chưa có khóa thì web vẫn mở được nhưng sẽ báo cần
+cấu hình `.env`.
 
 Để dùng khóa chung của máy chủ, sao chép `.env.example` thành `.env`, điền
 `OPENROUTER_API_KEY`, rồi khởi động lại. DocWeave mặc định gọi OpenRouter tại
